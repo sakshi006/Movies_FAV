@@ -1,12 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { createStore } from "redux";
+
 import "./index.css";
 import App from "./Components/App";
-// import reportWebVitals from './reportWebVitals';
+import movies from "./reducers";
+
+const store = createStore(movies);
+console.log(store);
+// console.log(store.getState(), "before");
+
+// store.dispatch({
+//   type: "ADD_MOVIES",
+//   movies: [{ name: "Superman" }],
+// });
+
+// console.log(store.getState(), "after");
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App store={store} />
   </React.StrictMode>,
   document.getElementById("root")
 );
