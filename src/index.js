@@ -1,13 +1,37 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 
 import "./index.css";
 import App from "./Components/App";
-import movies from "./reducers";
+import rootReducer from "./reducers";
 
-const store = createStore(movies);
-console.log(store);
+//  functionn logger(obj,next,action)
+const logger =
+  ({ dispatch, getState }) =>
+  (next) =>
+  (action) => {
+    if (typeof action !== "function") {
+      console.log("ACTION_TYPE=", action.type);
+    }
+    next(action);
+  };
+
+// middlewares
+// const thunk =
+//   ({ dispatch, getState }) =>
+//   (next) =>
+//   (action) => {
+//     if (typeof action === "function") {
+//       action(dispatch);
+//       return;
+//     }
+//     next(action);
+//   };
+
+const store = createStore(rootReducer, applyMiddleware(logger, thunk));
+console.log("STORE IS HERE", store);
 // console.log(store.getState(), "before");
 
 // store.dispatch({
