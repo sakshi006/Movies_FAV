@@ -16,7 +16,7 @@ const initialMovieState = {
 };
 
 export function movies(state = initialMovieState, action) {
-  console.log("MOVIES REDUCER");
+  // console.log("MOVIES REDUCER");
   switch (action.type) {
     case ADD_MOVIES:
       return {
